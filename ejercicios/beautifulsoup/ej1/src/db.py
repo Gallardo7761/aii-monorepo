@@ -50,6 +50,14 @@ class DBManager:
         except Exception as e:
             print("Error selecting:", e)
             return []
+        
+    def get_singleton(self, singleton_table):
+        try:
+            cursor = self.conn.execute(f"SELECT * FROM {singleton_table}")
+            return [row[0] for row in cursor.fetchall()]
+        except Exception as e:
+            print("Error selecting:", e)
+            return []
 
     def get_by(self, table_name, column, value):
         try:
@@ -101,6 +109,15 @@ class DBManager:
                 self.conn.execute(query, (where_value,))
         except Exception as e:
             print("Error deleting:", e)
+            
+    def clear(self, table_name):
+        query = f"DELETE FROM {table_name};"
+        
+        try:
+            with self.conn:
+                self.conn.execute(query)
+        except Exception as e:
+            print("Error clearing table: ", e)
 
     def exists(self, table_name, where_column, where_value):
         query = f"SELECT 1 FROM {table_name} WHERE {where_column} = ? LIMIT 1;"

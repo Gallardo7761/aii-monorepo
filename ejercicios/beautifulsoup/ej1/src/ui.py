@@ -15,26 +15,22 @@ class WinesUI():
         # Menu Datos
         datos_menu = tk.Menu(self.menu, tearoff=0)
         datos_menu.add_command(label="Cargar", command=lambda: self.callback("cargar"))
+        datos_menu.add_command(label="Listar", command=lambda: self.callback("listar"))
         datos_menu.add_separator()
         datos_menu.add_command(label="Salir", command=self.root.quit)
         self.menu.add_cascade(label="Datos", menu=datos_menu)
 
-        # Menu Listar
-        listar_menu = tk.Menu(self.menu, tearoff=0)
-        listar_menu.add_command(label="Completo", command=lambda: self.callback("listar_completo"))
-        listar_menu.add_command(label="Ordenado", command=lambda: self.callback("listar_ordenado"))
-        self.menu.add_cascade(label="Listar", menu=listar_menu)
-
         # Menu Buscar
         buscar_menu = tk.Menu(self.menu, tearoff=0)
-        buscar_menu.add_command(label="Título", command=lambda: self.callback("buscar_titulo"))
-        buscar_menu.add_command(label="Editorial", command=lambda: self.callback("buscar_editorial"))
+        buscar_menu.add_command(label="Denominación", command=lambda: self.callback("buscar_denominacion"))
+        buscar_menu.add_command(label="Precio", command=lambda: self.callback("buscar_precio"))
+        buscar_menu.add_command(label="Uva", command=lambda: self.callback("buscar_uva"))
         self.menu.add_cascade(label="Buscar", menu=buscar_menu)
 
         # Callback externo desde el punto de entrada
         self.callback = None
         
-    def show_list(self, books, fields, title="Listado"):
+    def show_list(self, items, fields, title="Listado"):
         mw = tk.Toplevel(self.root)
         mw.title(title)
         listbox = tk.Listbox(mw, width=80, height=20)
@@ -44,8 +40,8 @@ class WinesUI():
         listbox.config(yscrollcommand=scrollbar.set)
         scrollbar.config(command=listbox.yview)
         
-        for book in books:
-            row = " | ".join(str(book[field]) for field in fields)
+        for item in items:
+            row = " | ".join(str(item[field]) for field in fields)
             listbox.insert("end", row)
             
     def ask_text(self, label, callback):

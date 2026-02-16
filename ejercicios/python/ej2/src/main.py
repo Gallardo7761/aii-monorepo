@@ -28,11 +28,6 @@ def main():
     root = Tk()
     ui = BooksUI(root)
     
-    books = fr.read(CSV_PATH)
-    for book in books:
-        print(book)
-    
-    
     def handle_action(action):
         match(action):
             case "cargar":
