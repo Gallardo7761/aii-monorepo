@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk, messagebox
 from tkinter.scrolledtext import ScrolledText
 
-class WinesUI():
+class RecipesUI():
     def __init__(self, root, title = "AII"):
         self.root = root
         self.root.title(title)
@@ -22,12 +22,12 @@ class WinesUI():
         # Menu Listar
         listar_menu = tk.Menu(self.menu, tearoff=0)
         listar_menu.add_command(label= "Recetas", command = lambda:  self.callback("listar_recetas"))
+        self.menu.add_cascade(label="Listar", menu=listar_menu)
 
         # Menu Buscar
         buscar_menu = tk.Menu(self.menu, tearoff=0)
         buscar_menu.add_command(label="Receta por autor", command=lambda: self.callback("buscar_autor"))
         buscar_menu.add_command(label="Receta por fecha", command=lambda: self.callback("buscar_fecha"))
-
         self.menu.add_cascade(label="Buscar", menu=buscar_menu)
 
         # Callback externo desde el punto de entrada
