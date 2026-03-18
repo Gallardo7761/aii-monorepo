@@ -17,7 +17,7 @@ from whoosh import index, qparser, query
 
 BASE_URL = "https://recetas.elperiodico.com"
 RECIPES_URL = BASE_URL + "/Recetas-de-Aperitivos-tapas-listado_receta-1_1.html"
-DATA_DIR = Path(__file__).parent.parent / "index"
+DATA_DIR = Path(__file__).parent / "index"
 
 def init_ssl():
     import os, ssl
